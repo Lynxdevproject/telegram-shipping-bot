@@ -9,33 +9,37 @@ from telegram.ext import (
 from dotenv import load_dotenv
 import os
 
-# Import handler modular
+# 🔥 Anti-sleep setup buat Replit
+from keep_alive import keep_alive
+keep_alive()
+
+# 📦 Import handlers modular
 from handlers.start import start, set_language
 from handlers.matching import matching
 from handlers.ignore import ignoreme
 from handlers.unignore import unignoreme
-from handlers.identity_watcher import identity_watcher  # listener real-time deteksi perubahan identitas
+from handlers.identity_watcher import identity_watcher  # live detector perubahan nama
 
-# Load token dari .env
+# 🌱 Load token dari .env
 load_dotenv()
 TOKEN = os.getenv("BOT_TOKEN")
 
 async def main():
     app = ApplicationBuilder().token(TOKEN).build()
 
-    # ⚙️ Command Handler
+    # ✅ Command handlers
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("matching", matching))
     app.add_handler(CommandHandler("ignoreme", ignoreme))
     app.add_handler(CommandHandler("unignoreme", unignoreme))
 
-    # 🌐 Callback handler untuk language selection
+    # 🌐 Callback untuk language choice
     app.add_handler(CallbackQueryHandler(set_language, pattern="^lang_"))
 
-    # 🕵️‍♂️ Real-time identity watcher (always on listener)
+    # 🕵️ Real-time identity watcher (always on)
     app.add_handler(MessageHandler(filters.ALL, identity_watcher))
 
-    # 🚀 Run bot polling
+    # 🔁 Polling start
     await app.run_polling()
 
 if __name__ == "__main__":
