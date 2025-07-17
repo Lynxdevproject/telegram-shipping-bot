@@ -1,0 +1,25 @@
+# Bot secret
+.env
+
+# Python artifacts
+__pycache__/
+*.pyc
+
+# Replit cache / system
+.replit
+*.db
+*.sqlite3
+
+# Log files (kalau pake logger)
+*.log
+log/
+logs/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Optional: JSON config or pairing history
+*.json
